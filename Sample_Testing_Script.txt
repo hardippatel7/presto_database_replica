@@ -1,0 +1,223 @@
+--Sample Data Insertion
+
+--Address
+INSERT INTO "ADDRESS" (ADDRESS_ID, STREET_ADDRESS, APT_BUILDING_SUITE, CITY, PROVINCE, POSTAL_CODE) 
+VALUES (ADDRESS_PK_SEQ.nextval, '11', 'Eglinton Avenue', 'Toronto', 'ON', 'M1V 9XY');
+
+INSERT INTO "ADDRESS" (ADDRESS_ID, STREET_ADDRESS, APT_BUILDING_SUITE, CITY, PROVINCE, POSTAL_CODE) 
+VALUES (ADDRESS_PK_SEQ.nextval, '12', 'Eglinton Avenue', 'Toronto', 'ON', 'M1V 9XY');
+
+INSERT INTO "ADDRESS" (ADDRESS_ID, STREET_ADDRESS, APT_BUILDING_SUITE, CITY, PROVINCE, POSTAL_CODE) 
+VALUES (ADDRESS_PK_SEQ.nextval, '13', 'Eglinton Avenue', 'Toronto', 'ON', 'M1V 9XY');
+
+INSERT INTO "ADDRESS" (ADDRESS_ID, STREET_ADDRESS, APT_BUILDING_SUITE, CITY, PROVINCE, POSTAL_CODE) 
+VALUES (ADDRESS_PK_SEQ.nextval, '14', 'Eglinton Avenue', 'Toronto', 'ON', 'M1V 9XY');
+
+INSERT INTO "ADDRESS" (ADDRESS_ID, STREET_ADDRESS, APT_BUILDING_SUITE, CITY, PROVINCE, POSTAL_CODE) 
+VALUES (ADDRESS_PK_SEQ.nextval, '15', 'Eglinton Avenue', 'Toronto', 'ON', 'M1V 9XY');
+
+INSERT INTO "ADDRESS" (ADDRESS_ID, STREET_ADDRESS, APT_BUILDING_SUITE, CITY, PROVINCE, POSTAL_CODE) 
+VALUES (ADDRESS_PK_SEQ.nextval, '16', 'Eglinton Avenue', 'Toronto', 'ON', 'M1V 9XY');
+
+INSERT INTO "ADDRESS" (ADDRESS_ID, STREET_ADDRESS, APT_BUILDING_SUITE, CITY, PROVINCE, POSTAL_CODE) 
+VALUES (ADDRESS_PK_SEQ.nextval, '17', 'Eglinton Avenue', 'Toronto', 'ON', 'M1V 9XY');
+
+INSERT INTO "ADDRESS" (ADDRESS_ID, STREET_ADDRESS, APT_BUILDING_SUITE, CITY, PROVINCE, POSTAL_CODE) 
+VALUES (ADDRESS_PK_SEQ.nextval, '18', 'Eglinton Avenue', 'Toronto', 'ON', 'M1V 9XY');
+
+INSERT INTO "ADDRESS" (ADDRESS_ID, STREET_ADDRESS, APT_BUILDING_SUITE, CITY, PROVINCE, POSTAL_CODE) 
+VALUES (ADDRESS_PK_SEQ.nextval, '19', 'Eglinton Avenue', 'Toronto', 'ON', 'M1V 9XY');
+
+INSERT INTO "ADDRESS" (ADDRESS_ID, STREET_ADDRESS, APT_BUILDING_SUITE, CITY, PROVINCE, POSTAL_CODE) 
+VALUES (ADDRESS_PK_SEQ.nextval, '20', 'Eglinton Avenue', 'Toronto', 'ON', 'M1V 9XY');
+
+
+--Presto User
+INSERT INTO "PRESTO_USER" (USER_ID, FIRST_NAME, LAST_NAME, EMAIL_ADDRESS, PASSWORD, PHONE_NUMBER, ADDRESS_ID) 
+VALUES (PRESTO_USER_PK_SEQ.nextval, 'Alice', 'Rachel', 'alice@sample.com', 'Admin@123', '6478641001', '1');
+
+INSERT INTO "PRESTO_USER" (USER_ID, FIRST_NAME, LAST_NAME, EMAIL_ADDRESS, PASSWORD, PHONE_NUMBER, ADDRESS_ID) 
+VALUES (PRESTO_USER_PK_SEQ.nextval, 'Brandon', 'Waters', 'brandon@sample.com', 'Admin@123', '6478641002', '2');
+
+INSERT INTO "PRESTO_USER" (USER_ID, FIRST_NAME, LAST_NAME, EMAIL_ADDRESS, PASSWORD, PHONE_NUMBER, ADDRESS_ID) 
+VALUES (PRESTO_USER_PK_SEQ.nextval, 'Cheryl', 'Gen', 'cheryl@sample.com', 'Admin@123', '6478641003', '3');
+
+INSERT INTO "PRESTO_USER" (USER_ID, FIRST_NAME, LAST_NAME, EMAIL_ADDRESS, PASSWORD, PHONE_NUMBER, ADDRESS_ID) 
+VALUES (PRESTO_USER_PK_SEQ.nextval, 'Dany', 'Targaryn', 'dany@sample.com', 'Admin@123', '6478641004', '4');
+
+INSERT INTO "PRESTO_USER" (USER_ID, FIRST_NAME, LAST_NAME, EMAIL_ADDRESS, PASSWORD, PHONE_NUMBER, ADDRESS_ID) 
+VALUES (PRESTO_USER_PK_SEQ.nextval, 'Enzo', 'Ferrari', 'enzo@sample.com', 'Admin@123', '6478641005', '5');
+
+INSERT INTO "PRESTO_USER" (USER_ID, FIRST_NAME, LAST_NAME, EMAIL_ADDRESS, PASSWORD, PHONE_NUMBER, ADDRESS_ID) 
+VALUES (PRESTO_USER_PK_SEQ.nextval, 'Frank', 'Lincoln', 'frank@sample.com', 'Admin@123', '6478641006', '6');
+
+INSERT INTO "PRESTO_USER" (USER_ID, FIRST_NAME, LAST_NAME, EMAIL_ADDRESS, PASSWORD, PHONE_NUMBER, ADDRESS_ID) 
+VALUES (PRESTO_USER_PK_SEQ.nextval, 'Gill', 'Godman', 'gill@sample.com', 'Admin@123', '6478641007', '7');
+
+INSERT INTO "PRESTO_USER" (USER_ID, FIRST_NAME, LAST_NAME, EMAIL_ADDRESS, PASSWORD, PHONE_NUMBER, ADDRESS_ID) 
+VALUES (PRESTO_USER_PK_SEQ.nextval, 'Harry', 'Johnsson', 'harry@sample.com', 'Admin@123', '6478641008', '8');
+
+INSERT INTO "PRESTO_USER" (USER_ID, FIRST_NAME, LAST_NAME, EMAIL_ADDRESS, PASSWORD, PHONE_NUMBER, ADDRESS_ID) 
+VALUES (PRESTO_USER_PK_SEQ.nextval, 'Isla', 'Fisher', 'isla@sample.com', 'Admin@123', '6478641009', '9');
+
+INSERT INTO "PRESTO_USER" (USER_ID, FIRST_NAME, LAST_NAME, EMAIL_ADDRESS, PASSWORD, PHONE_NUMBER, ADDRESS_ID) 
+VALUES (PRESTO_USER_PK_SEQ.nextval, 'Janny', 'Aniston', 'janny@sample.com', 'Admin@123', '6478641010', '10');
+
+
+--Transit System
+INSERT INTO "TRANSIT_SYSTEM" (TRANSIT_SYSTEM_ID, NAME) VALUES ('1', 'TTC');
+
+
+--Stop Location
+INSERT INTO "STOP_LOCATION" (LOCATION, TRANSIT_ID) VALUES ('Young@Dundas', '1');
+INSERT INTO "STOP_LOCATION" (LOCATION, TRANSIT_ID) VALUES ('Eglinton', '1');
+INSERT INTO "STOP_LOCATION" (LOCATION, TRANSIT_ID) VALUES ('Scarborough', '1');
+INSERT INTO "STOP_LOCATION" (LOCATION, TRANSIT_ID) VALUES ('NorthYork', '1');
+INSERT INTO "STOP_LOCATION" (LOCATION, TRANSIT_ID) VALUES ('EastYork', '1');
+
+
+--Saved Payment Method
+INSERT INTO "SAVED_PAYMENT_METHOD" (CARD_HOLDER_NAME, CARD_NUMBER, EXPIRY, CVV_NUMBER, STREET_NUMBER, STREET_NAME, POSTAL_CODE) 
+VALUES ('alice', '5555666677770001', '0925', '222', '11', 'Eglinton Avenue', 'M1V 9XY');
+
+INSERT INTO "SAVED_PAYMENT_METHOD" (CARD_HOLDER_NAME, CARD_NUMBER, EXPIRY, CVV_NUMBER, STREET_NUMBER, STREET_NAME, POSTAL_CODE) 
+VALUES ('brandon', '5555666677770001', '0925', '222', '12', 'Eglinton Avenue', 'M1V 9XY');
+
+INSERT INTO "SAVED_PAYMENT_METHOD" (CARD_HOLDER_NAME, CARD_NUMBER, EXPIRY, CVV_NUMBER, STREET_NUMBER, STREET_NAME, POSTAL_CODE) 
+VALUES ('cheryl', '5555666677770001', '0925', '222', '13', 'Eglinton Avenue', 'M1V 9XY');
+
+INSERT INTO "SAVED_PAYMENT_METHOD" (CARD_HOLDER_NAME, CARD_NUMBER, EXPIRY, CVV_NUMBER, STREET_NUMBER, STREET_NAME, POSTAL_CODE) 
+VALUES ('dany', '5555666677770001', '0925', '222', '14', 'Eglinton Avenue', 'M1V 9XY');
+
+INSERT INTO "SAVED_PAYMENT_METHOD" (CARD_HOLDER_NAME, CARD_NUMBER, EXPIRY, CVV_NUMBER, STREET_NUMBER, STREET_NAME, POSTAL_CODE) 
+VALUES ('enzo', '5555666677770001', '0925', '222', '15', 'Eglinton Avenue', 'M1V 9XY');
+
+
+--Presto Card
+INSERT INTO "PRESTO_CARD" (CARD_NUMBER, NICK_NAME, CURRENT_BALANCE, USER_ID) VALUES ('1111222233330001', 'a1', '20', '1');
+INSERT INTO "PRESTO_CARD" (CARD_NUMBER, NICK_NAME, CURRENT_BALANCE, USER_ID) VALUES ('1111222233330002', 'b1', '20', '1');
+INSERT INTO "PRESTO_CARD" (CARD_NUMBER, NICK_NAME, CURRENT_BALANCE, USER_ID) VALUES ('1111222233330003', 'c1', '20', '1');
+INSERT INTO "PRESTO_CARD" (CARD_NUMBER, NICK_NAME, CURRENT_BALANCE, USER_ID) VALUES ('1111222233330004', 'd1', '20', '1');
+INSERT INTO "PRESTO_CARD" (CARD_NUMBER, NICK_NAME, CURRENT_BALANCE, USER_ID) VALUES ('1111222233330005', 'e1', '20', '1');
+INSERT INTO "PRESTO_CARD" (CARD_NUMBER, NICK_NAME, CURRENT_BALANCE, USER_ID) VALUES ('1111222233330006', 'f1', '20', '1');
+INSERT INTO "PRESTO_CARD" (CARD_NUMBER, NICK_NAME, CURRENT_BALANCE, USER_ID) VALUES ('1111222233330007', 'g1', '20', '1');
+INSERT INTO "PRESTO_CARD" (CARD_NUMBER, NICK_NAME, CURRENT_BALANCE, USER_ID) VALUES ('1111222233330008', 'h1', '20', '1');
+INSERT INTO "PRESTO_CARD" (CARD_NUMBER, NICK_NAME, CURRENT_BALANCE, USER_ID) VALUES ('1111222233330009', 'i1', '20', '1');
+INSERT INTO "PRESTO_CARD" (CARD_NUMBER, NICK_NAME, CURRENT_BALANCE, USER_ID) VALUES ('1111222233330010', 'k1', '20', '1');
+
+
+--Transaction
+INSERT INTO "TRANSACTION" (TRANSACTION_ID, USER_ID, CARD_ID, AMOUNT, PAYMENT_STATUS, SAVED_PAYMENT_METHOD_ID, PAYMENT_METHOD) 
+VALUES (get_transaction_seq_val, '1', '1', '20', 'SUCCESS', '1', 'CREDIT CARD');
+
+INSERT INTO "TRANSACTION" (TRANSACTION_ID, USER_ID, CARD_ID, AMOUNT, PAYMENT_STATUS, SAVED_PAYMENT_METHOD_ID, PAYMENT_METHOD) 
+VALUES (get_transaction_seq_val, '2', '2', '20', 'SUCCESS', '2', 'CREDIT CARD');
+
+INSERT INTO "TRANSACTION" (TRANSACTION_ID, USER_ID, CARD_ID, AMOUNT, PAYMENT_STATUS, SAVED_PAYMENT_METHOD_ID, PAYMENT_METHOD) 
+VALUES (get_transaction_seq_val, '3', '3', '20', 'SUCCESS', '3', 'CREDIT CARD');
+
+INSERT INTO "TRANSACTION" (TRANSACTION_ID, USER_ID, CARD_ID, AMOUNT, PAYMENT_STATUS, SAVED_PAYMENT_METHOD_ID, PAYMENT_METHOD) 
+VALUES (get_transaction_seq_val, '4', '4', '20', 'SUCCESS', '4', 'CREDIT CARD');
+
+INSERT INTO "TRANSACTION" (TRANSACTION_ID, USER_ID, CARD_ID, AMOUNT, PAYMENT_STATUS, SAVED_PAYMENT_METHOD_ID, PAYMENT_METHOD) 
+VALUES (get_transaction_seq_val, '5', '5', '20', 'SUCCESS', '5', 'CREDIT CARD');
+
+
+--Activity
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('1', '1', '1', '2.5');
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('1', '2', '2', '2.5');
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('2', '3', '3', '2.5');
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('2', '4', '4', '2.5');
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('3', '5', '5', '2.5');
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('3', '6', '6', '2.5');
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('4', '7', '7', '2.5');
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('4', '8', '8', '2.5');
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('5', '9', '9', '2.5');
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('5', '10', '10', '2.5');
+
+
+--Testing Trigger 1
+INSERT INTO "ACTIVITY" (STOP_LOCATION_ID, USER_ID, CARD_ID, DEDUCTED_AMOUNT) VALUES ('5', '10', '10', '2.5');
+
+--Rest of the 6 triggers are being used in background in all Insert Operations.
+
+--While inserting records into any of the above table, Sequences and Triggers are being tested.
+/
+
+
+--Testing Procedure 1
+BEGIN
+  add_new_presto_card('1111222233330011','a1', 1, 'Adult');
+END;
+/
+
+
+--Testing Procedure 2
+BEGIN
+  enable_auto_pay('1111222233330011');
+END;
+/
+
+--Testing Function 1
+DECLARE
+  total_sum NUMBER := 0;
+  not_found_exception EXCEPTION;
+BEGIN
+  total_sum := get_total_spending (1111222233330001);
+  IF total_sum IS NULL THEN
+    RAISE not_found_exception;
+  END IF;
+  dbms_output.put_line('Total Spending amount : ' || total_sum);
+EXCEPTION
+  WHEN not_found_exception THEN
+  dbms_output.put_line('Error!! Could not get any data for given Presto Card number');
+END;
+/
+
+
+--Testing Function 2
+  DECLARE
+    first_name_ presto_user.first_name%TYPE := 'Katie';
+    last_name_ presto_user.last_name%TYPE := 'Holmes';
+    email presto_user.email_address%TYPE := 'katie@sample.com';
+    password_ presto_user.password%TYPE := 'Admin@123';
+    phone_number_ presto_user.phone_number%TYPE := '6478640011'; 
+    street_address_ address.street_address%TYPE := 'Eglinton Avenue';
+    building_no address.apt_building_suite%TYPE := '12'; 
+    city_ address.city%TYPE := 'Toronto';
+    province_ address.province%TYPE := 'ON';
+    postal address.postal_code%TYPE := 'M1V 8X9';
+    generated_id presto_user.user_id%TYPE := NULL;
+    data_insertion_exception EXCEPTION;
+  BEGIN
+    generated_id := create_new_user (first_name_ , last_name_ , email, password_,
+                                                    phone_number_, street_address_, building_no, city_, 
+                                                    province_, postal);
+    IF generated_id IS NULL THEN
+      raise data_insertion_exception;
+    END IF;
+    dbms_output.put_line('User created, User id is : ' || generated_id);
+    EXCEPTION
+    WHEN data_insertion_exception THEN
+    dbms_output.put_line('Error!! User could not created!');
+  END;
+/  
+  
+--Testing Package
+DECLARE 
+   total_spending NUMBER;
+   user_id NUMBER;
+BEGIN 
+   
+   presto_package.add_new_presto_card('1111222233330012','b1',2,'Adult');
+   
+   presto_package.enable_auto_pay('1111222233330012');
+   
+   user_id := presto_package.create_new_user('Lyndon','Johnsson','lyndon@sample.com','Admin@1234','6478640012','Eglinton Avenue','13','Toronto',
+   'ON','M1V9Y8');
+   dbms_output.put_line('Output of Function create_new_user : ' || user_id);
+   
+   total_spending := presto_package.get_total_spending('1111222233330001');
+   dbms_output.put_line('Output of Function get_total_spending : ' || total_spending);
+END;
+/
