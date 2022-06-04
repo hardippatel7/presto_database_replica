@@ -1,0 +1,442 @@
+--Creating Tables
+
+--Address
+  CREATE TABLE "ADDRESS" 
+   (	"ADDRESS_ID" NUMBER(10,0) NOT NULL ENABLE, 
+	"STREET_ADDRESS" VARCHAR2(50 BYTE), 
+	"APT_BUILDING_SUITE" VARCHAR2(20 BYTE), 
+	"CITY" VARCHAR2(50 BYTE), 
+	"PROVINCE" VARCHAR2(50 BYTE), 
+	"COUNTRY" VARCHAR2(50 BYTE) DEFAULT 'Canada', 
+	"POSTAL_CODE" VARCHAR2(20 BYTE), 
+	 CONSTRAINT "ADDRESS_PK" PRIMARY KEY ("ADDRESS_ID")
+   );
+
+
+--Presto User
+  CREATE TABLE "PRESTO_USER" 
+   (	"USER_ID" NUMBER(10,0) NOT NULL ENABLE, 
+	"FIRST_NAME" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"LAST_NAME" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"EMAIL_ADDRESS" VARCHAR2(50 BYTE) NOT NULL ENABLE, 
+	"PASSWORD" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"PHONE_NUMBER" VARCHAR2(20 BYTE), 
+	"ADDRESS_ID" NUMBER(10,0), 
+	 CONSTRAINT "PRESTO_USER_PK" PRIMARY KEY ("USER_ID"),
+	 CONSTRAINT "ADDRESS_FK1" FOREIGN KEY ("ADDRESS_ID")
+	  REFERENCES "ADDRESS" ("ADDRESS_ID") ENABLE
+   );  
+  
+--Saved Payment Method
+  CREATE TABLE "SAVED_PAYMENT_METHOD" 
+   (	"METHOD_ID" NUMBER(10,0) NOT NULL ENABLE, 
+	"CARD_HOLDER_NAME" VARCHAR2(20 BYTE), 
+	"CARD_NUMBER" VARCHAR2(50 BYTE), 
+	"EXPIRY" VARCHAR2(10 BYTE), 
+	"CVV_NUMBER" VARCHAR2(3 BYTE), 
+	"STREET_NUMBER" VARCHAR2(20 BYTE), 
+	"STREET_NAME" VARCHAR2(50 BYTE), 
+	"POSTAL_CODE" VARCHAR2(10 BYTE), 
+	 CONSTRAINT "SAVED_PAYMENT_METHOD_PK" PRIMARY KEY ("METHOD_ID")
+   );
+    
+  
+--Presto Card
+  CREATE TABLE "PRESTO_CARD" 
+   (	"CARD_ID" NUMBER(10,0) NOT NULL ENABLE, 
+	"CARD_NUMBER" VARCHAR2(30 BYTE), 
+	"CURRENT_BALANCE" NUMBER(14,2) DEFAULT 0.00, 
+	"PENDING_BALANCE" NUMBER(14,2) DEFAULT 0.00, 
+	"NICK_NAME" VARCHAR2(10 BYTE), 
+	"USER_ID" NUMBER(10,0), 
+	"FARE_TYPE" VARCHAR2(20 BYTE) DEFAULT 'Adult', 
+	"IS_ACTIVE" CHAR(1 BYTE) DEFAULT 0, 
+	"IS_AUTO_LOAD" CHAR(1 BYTE) DEFAULT 0, 
+	"SAVED_PAYMENT_METHOD_ID" NUMBER(10,0), 
+	 CONSTRAINT "PRESTO_CARD_PK" PRIMARY KEY ("CARD_ID"), 
+	 CONSTRAINT "PRESTO_USER_FK1" FOREIGN KEY ("USER_ID")
+	  REFERENCES "PRESTO_USER" ("USER_ID") ENABLE,
+	 CONSTRAINT "SAVED_PAYMENT_METHOD_FK2" FOREIGN KEY ("SAVED_PAYMENT_METHOD_ID")
+	  REFERENCES "SAVED_PAYMENT_METHOD" ("METHOD_ID") ENABLE
+   );
+  
+
+--Transit System
+  CREATE TABLE "TRANSIT_SYSTEM" 
+   (	"TRANSIT_SYSTEM_ID" NUMBER(10,0) NOT NULL ENABLE, 
+	"NAME" VARCHAR2(50 BYTE), 
+	 CONSTRAINT "TRANSIT_SYSTEM_PK" PRIMARY KEY ("TRANSIT_SYSTEM_ID")
+   );
+  
+  
+--Stop Location
+  CREATE TABLE "STOP_LOCATION" 
+   (	"STOP_ID" NUMBER(10,0) NOT NULL ENABLE, 
+	"LOCATION" VARCHAR2(50 BYTE), 
+	"TRANSIT_ID" NUMBER(10,0), 
+	 CONSTRAINT "STOP_LOCATION_PK" PRIMARY KEY ("STOP_ID"), 
+	 CONSTRAINT "TRANSIT_SYSTEM_FK1" FOREIGN KEY ("TRANSIT_ID")
+	  REFERENCES "TRANSIT_SYSTEM" ("TRANSIT_SYSTEM_ID") ENABLE
+   );
+  
+  
+--Activity
+  CREATE TABLE "ACTIVITY" 
+   (	"ACTIVITY_ID" NUMBER(10,0) NOT NULL ENABLE, 
+	"STOP_LOCATION_ID" NUMBER(10,0), 
+	"USER_ID" NUMBER(10,0), 
+	"CARD_ID" NUMBER(10,0), 
+	"TIMESTAMP" TIMESTAMP (6) DEFAULT CURRENT_TIMESTAMP, 
+	"DEDUCTED_AMOUNT" NUMBER(14,2), 
+	 CONSTRAINT "ACTIVITY_PK" PRIMARY KEY ("ACTIVITY_ID"), 
+	 CONSTRAINT "STOP_LOCATION_FK1" FOREIGN KEY ("STOP_LOCATION_ID")
+	  REFERENCES "STOP_LOCATION" ("STOP_ID") ENABLE, 
+	 CONSTRAINT "PRESTO_CARD_FK1" FOREIGN KEY ("CARD_ID")
+	  REFERENCES "PRESTO_CARD" ("CARD_ID") ENABLE, 
+	 CONSTRAINT "PRESTO_USER_FK2" FOREIGN KEY ("USER_ID")
+	  REFERENCES "PRESTO_USER" ("USER_ID") ENABLE
+   );
+ 
+  
+--Transaction
+  CREATE TABLE "TRANSACTION" 
+   (	"TRANSACTION_ID" VARCHAR2(50 BYTE) NOT NULL ENABLE, 
+	"USER_ID" NUMBER(10,0), 
+	"CARD_ID" NUMBER(10,0), 
+	"AMOUNT" NUMBER(14,2), 
+	"TIMESTAMP" TIMESTAMP (6), 
+	"PAYMENT_STATUS" VARCHAR2(50 BYTE), 
+	"SAVED_PAYMENT_METHOD_ID" NUMBER(10,0), 
+	"PAYMENT_METHOD" VARCHAR2(20 BYTE), 
+	 CONSTRAINT "TRANSACTION_PK" PRIMARY KEY ("TRANSACTION_ID"), 
+	 CONSTRAINT "PRESTO_CARD_FK3" FOREIGN KEY ("CARD_ID")
+	  REFERENCES "PRESTO_CARD" ("CARD_ID") ENABLE, 
+	 CONSTRAINT "PRESTO_USER_FK4" FOREIGN KEY ("USER_ID")
+	  REFERENCES "PRESTO_USER" ("USER_ID") ENABLE, 
+	 CONSTRAINT "SAVED_PAYMENT_METHOD_FK1" FOREIGN KEY ("SAVED_PAYMENT_METHOD_ID")
+	  REFERENCES "SAVED_PAYMENT_METHOD" ("METHOD_ID") ENABLE
+   );
+   
+   
+--Creating Sequences
+
+   CREATE SEQUENCE  "ACTIVITY_PK_SEQ"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 1;
+
+   CREATE SEQUENCE  "ADDRESS_PK_SEQ"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 1;
+
+   CREATE SEQUENCE  "PRESTO_CARD_PK_SEQ"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 1;
+
+   CREATE SEQUENCE  "PRESTO_USER_PK_SEQ"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 1;
+
+   CREATE SEQUENCE  "SAVED_PAYMENT_METHOD_PK_SEQ"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 1;
+
+   CREATE SEQUENCE  "STOP_LOCATION_PK_SEQ"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 1;
+
+   CREATE SEQUENCE  "TRANSIT_SYSTEM_PK_SEQ"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 1;
+   
+   CREATE SEQUENCE  "TRANSACTION_SEQ"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 1;
+
+
+--Creating Indexes
+
+  CREATE INDEX "ACTIVITY_USER_ID_INDEX" ON "ACTIVITY" ("USER_ID");
+
+  CREATE UNIQUE INDEX "PRESTO_CARD_NUMBER_INDEX" ON "PRESTO_CARD" ("CARD_NUMBER");
+
+
+--Creating Triggers
+
+create or replace trigger insert_activity  
+   before insert on "ACTIVITY" 
+   for each row 
+begin  
+   if inserting then 
+      if :NEW."ACTIVITY_ID" is null then 
+         select ACTIVITY_PK_SEQ.nextval into :NEW."ACTIVITY_ID" from dual; 
+      end if; 
+   end if; 
+end;
+/
+
+
+create or replace trigger insert_presto_card  
+   before insert on "PRESTO_CARD" 
+   for each row 
+begin  
+   if inserting then 
+      if :NEW."CARD_ID" is null then 
+         select PRESTO_CARD_PK_SEQ.nextval into :NEW."CARD_ID" from dual; 
+      end if; 
+   end if; 
+end;
+/
+
+
+create or replace trigger insert_saved_payment_method  
+   before insert on "SAVED_PAYMENT_METHOD" 
+   for each row 
+begin  
+   if inserting then 
+      if :NEW."METHOD_ID" is null then 
+         select SAVED_PAYMENT_METHOD_PK_SEQ.nextval into :NEW."METHOD_ID" from dual; 
+      end if; 
+   end if; 
+end;
+/
+
+create or replace trigger insert_stop_location  
+   before insert on "STOP_LOCATION" 
+   for each row 
+begin  
+   if inserting then 
+      if :NEW."STOP_ID" is null then 
+         select STOP_LOCATION_PK_SEQ.nextval into :NEW."STOP_ID" from dual; 
+      end if; 
+   end if; 
+end;
+/
+
+create or replace trigger insert_transit_system  
+   before insert on "TRANSIT_SYSTEM" 
+   for each row 
+begin  
+   if inserting then 
+      if :NEW."TRANSIT_SYSTEM_ID" is null then 
+         select TRANSIT_SYSTEM_PK_SEQ.nextval into :NEW."TRANSIT_SYSTEM_ID" from dual; 
+      end if; 
+   end if; 
+end;
+/
+
+
+create or replace function get_transaction_seq_val
+return varchar2
+is
+begin
+return 'TXN00000' || TRANSACTION_SEQ.NEXTVAL;
+end;
+/
+
+create or replace trigger insert_transaction  
+   before insert on "TRANSACTION" 
+   for each row 
+begin  
+   if inserting then 
+      if :NEW."TRANSACTION_ID" is null then 
+         select get_transaction_seq_val into :NEW."TRANSACTION_ID" from dual; 
+      end if; 
+   end if; 
+end;
+/
+
+
+create or replace TRIGGER deduct_balance_on_activity
+AFTER INSERT ON ACTIVITY
+REFERENCING NEW AS newRow OLD AS oldRow
+FOR EACH ROW
+DECLARE
+BEGIN
+UPDATE presto_card SET current_balance = current_balance - :newRow.deducted_amount 
+where card_id = :newRow.card_id;
+END deduct_balance_on_activity;
+/
+
+--ALTER TRIGGER "deduct_balance_on_activity" DISABLE;
+
+--Creating Procedures
+
+-- Procedure to Add New Presto Card
+CREATE OR replace PROCEDURE add_new_presto_card( card_number_ IN presto_card.card_number%TYPE,
+                                          nick_name_ IN presto_card.nick_name%TYPE,
+                                          user_id_ IN presto_card.user_id%TYPE,
+                                          fare_type_ IN presto_card.fare_type%TYPE)
+IS
+user_name presto_user.first_name%TYPE;
+BEGIN
+  select first_name into user_name from presto_user where user_id = user_id_;
+
+  INSERT INTO presto_card
+              (card_id, card_number, nick_name, user_id, fare_type)
+              VALUES
+              (PRESTO_CARD_PK_SEQ.NEXTVAL, card_number_, nick_name_, user_id_, fare_type_);
+EXCEPTION
+  WHEN no_data_found THEN
+    dbms_output.put_line('Error!! User not found with userId : ' || user_id_);
+END;
+/
+
+
+-- Procedure to Enable Auto Pay
+CREATE OR replace PROCEDURE enable_auto_pay(presto_card_number presto_card.card_number%TYPE)
+IS
+saved_method NUMBER;
+BEGIN
+  SELECT saved_payment_method_id into saved_method from presto_card 
+  WHERE card_number = presto_card_number;
+
+  UPDATE presto_card set is_auto_load = 1 where card_number = presto_card_number;
+  
+EXCEPTION
+  WHEN no_data_found THEN
+    dbms_output.put_line('Error!! No saved payment method found for auto loading, please add a payment method first.');
+END;
+/
+
+--Creating Functions
+
+-- Function to get total money spent by a Presto Card
+create or replace FUNCTION get_total_spending(presto_card_number presto_card.card_number%TYPE)
+  RETURN NUMBER
+IS
+  total_sum NUMBER(14,2);
+BEGIN
+  SELECT SUM(amount) INTO total_sum FROM transaction inner join presto_card 
+  on presto_card.card_id = transaction.card_id
+  AND card_number = presto_card_number;
+  RETURN total_sum;
+END;
+/
+-- Function to create a new Presto User
+CREATE OR replace FUNCTION create_new_user(first_name_ presto_user.first_name%TYPE,
+                                                          last_name_ presto_user.last_name%TYPE,
+                                                          email presto_user.email_address%TYPE,
+                                                          password_ presto_user.password%TYPE,
+                                                          phone_number_ presto_user.phone_number%TYPE, 
+                                                          street_address_ address.street_address%TYPE, 
+                                                          building_no address.apt_building_suite%TYPE, 
+                                                          city_ address.city%TYPE, 
+                                                          province_ address.province%TYPE, 
+                                                          postal address.postal_code%TYPE)
+  RETURN NUMBER 
+  AS 
+  generated_id presto_user.user_id%TYPE;
+  generated_address_id address.address_id%TYPE;
+  BEGIN
+    generated_address_id := ADDRESS_PK_SEQ.NEXTVAL;
+    INSERT INTO address
+                (address_id, street_address, apt_building_suite, city, province, postal_code)
+                VALUES
+                (generated_address_id, street_address_, building_no, city_, province_, postal);
+    generated_id := PRESTO_USER_PK_SEQ.NEXTVAL;
+    INSERT INTO presto_user
+                (user_id, first_name, last_name, email_address, password, phone_number, address_id)
+                VALUES
+                (generated_id, first_name_, last_name_, email, password_, phone_number_, generated_address_id);
+    RETURN generated_id;
+  END;
+  /
+  
+  
+
+
+
+
+--Creating Package
+
+--package specification
+CREATE OR REPLACE PACKAGE presto_package AS 
+    
+   PROCEDURE add_new_presto_card( card_number_ IN presto_card.card_number%TYPE,
+                                          nick_name_ IN presto_card.nick_name%TYPE,
+                                          user_id_ IN presto_card.user_id%TYPE,
+                                          fare_type_ IN presto_card.fare_type%TYPE); 
+   
+
+   PROCEDURE enable_auto_pay(presto_card_number presto_card.card_number%TYPE); 
+   
+   FUNCTION create_new_user(first_name_ presto_user.first_name%TYPE,
+                                                          last_name_ presto_user.last_name%TYPE,
+                                                          email presto_user.email_address%TYPE,
+                                                          password_ presto_user.password%TYPE,
+                                                          phone_number_ presto_user.phone_number%TYPE, 
+                                                          street_address_ address.street_address%TYPE, 
+                                                          building_no address.apt_building_suite%TYPE, 
+                                                          city_ address.city%TYPE, 
+                                                          province_ address.province%TYPE, 
+                                                          postal address.postal_code%TYPE) 
+    RETURN NUMBER;
+    
+    FUNCTION get_total_spending(presto_card_number VARCHAR2)
+    RETURN NUMBER;
+    
+END presto_package;
+/
+
+--package body
+CREATE OR REPLACE PACKAGE BODY presto_package AS 
+   PROCEDURE add_new_presto_card(card_number_ IN presto_card.card_number%TYPE,
+                                          nick_name_ IN presto_card.nick_name%TYPE,
+                                          user_id_ IN presto_card.user_id%TYPE,
+                                          fare_type_ IN presto_card.fare_type%TYPE)
+IS
+user_name presto_user.first_name%TYPE;
+BEGIN
+  select first_name into user_name from presto_user where user_id = user_id_;
+
+  INSERT INTO presto_card
+              (card_id, card_number, nick_name, user_id, fare_type)
+              VALUES
+              (PRESTO_CARD_PK_SEQ.NEXTVAL, card_number_, nick_name_, user_id_, fare_type_);
+EXCEPTION
+  WHEN no_data_found THEN
+    dbms_output.put_line('Error!! User not found with userId : ' || user_id_);
+END add_new_presto_card;
+   
+   
+    PROCEDURE enable_auto_pay(presto_card_number presto_card.card_number%TYPE)
+IS
+saved_method NUMBER;
+BEGIN
+  SELECT saved_payment_method_id into saved_method from presto_card 
+  WHERE card_number = presto_card_number;
+
+  UPDATE presto_card set is_auto_load = 1 where card_number = presto_card_number;
+
+EXCEPTION
+  WHEN no_data_found THEN
+    dbms_output.put_line('Error!! No saved payment method found for auto loading, please add a payment method first.');
+END enable_auto_pay;
+   
+   
+   FUNCTION create_new_user(first_name_ presto_user.first_name%TYPE,
+                                                          last_name_ presto_user.last_name%TYPE,
+                                                          email presto_user.email_address%TYPE,
+                                                          password_ presto_user.password%TYPE,
+                                                          phone_number_ presto_user.phone_number%TYPE, 
+                                                          street_address_ address.street_address%TYPE, 
+                                                          building_no address.apt_building_suite%TYPE, 
+                                                          city_ address.city%TYPE, 
+                                                          province_ address.province%TYPE, 
+                                                          postal address.postal_code%TYPE)
+  RETURN NUMBER 
+  AS 
+  generated_id presto_user.user_id%TYPE;
+  generated_address_id address.address_id%TYPE;
+  BEGIN
+    generated_address_id := ADDRESS_PK_SEQ.NEXTVAL;
+    INSERT INTO address
+                (address_id, street_address, apt_building_suite, city, province, postal_code)
+                VALUES
+                (generated_address_id, street_address_, building_no, city_, province_, postal);
+    generated_id := PRESTO_USER_PK_SEQ.NEXTVAL;
+    INSERT INTO presto_user
+                (user_id, first_name, last_name, email_address, password, phone_number, address_id)
+                VALUES
+                (generated_id, first_name_, last_name_, email, password_, phone_number_, generated_address_id);
+    RETURN generated_id;
+  END create_new_user;
+  
+  
+  FUNCTION get_total_spending(presto_card_number VARCHAR2)
+  RETURN NUMBER
+IS
+  total_sum NUMBER(14,2);
+BEGIN
+  SELECT SUM(amount) INTO total_sum FROM transaction inner join presto_card 
+  on presto_card.card_id = transaction.card_id
+  AND card_number = presto_card_number;
+  RETURN total_sum;
+END get_total_spending;
+   
+END presto_package;
+/
