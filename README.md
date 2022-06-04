@@ -1,5 +1,5 @@
 # presto_database_replica
-The repo contains the .sql file of the database of the Presto mobile app. 
+The repo contains the .txt file of the database of the Presto mobile app. 
 
 Open your Oracle SQL Developer and import the file on an empty schema. It will populate the strcture of the database.
 
